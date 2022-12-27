@@ -1,0 +1,45 @@
+<h1 id="tableLabel">Transaction History</h1>
+
+<p *ngIf="!transactions"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="transactions">
+    <thead>
+        <tr>
+            <th>Transaction Id</th>
+            <th>Vendor Reference</th>
+            <th>Request Amount</th>
+            <th>Date Created</th>
+            <th>Completed Date</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let transaction of transactions">
+            <td>{{ transaction.transactionId }}</td>
+            <td>{{ transaction.vendorReference || 'n/a' }}</td>
+            <td>{{ transaction.requestAmount | number: '1.2-2' }}</td>
+            <td>{{ transaction.dateCreated | date: 'short'}}</td>
+            <td>{{ (transaction.completedDate | date: 'short') || 'n/a'}}</td>
+            <td>
+                <div *ngIf="transaction.type===1" class="badge fw-bolder bg-info">
+                    Deposit
+                </div>
+                <div *ngIf="transaction.type===2" class="badge fw-bolder bg-warning">
+                    Withdrawal
+                </div>
+            </td>
+            <td>
+                <div class="badge fw-bolder"
+                     [ngClass]="{
+    'bg-primary': transaction.statusId === 1,
+    'bg-success': transaction.statusId === 2,
+    'bg-danger': transaction.statusId === 3
+  }">
+
+                    {{ transaction.statusName}}
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

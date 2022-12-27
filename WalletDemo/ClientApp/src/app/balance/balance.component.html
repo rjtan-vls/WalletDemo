@@ -1,0 +1,10 @@
+<div class="card" style="width: 25rem;">
+    <div class="card-body">
+        <h5 class="card-title">Total Balance</h5>
+        <h6 class="card-subtitle mb-2 text-muted">INR</h6>
+        <p class="card-text">${{walletBalance.balance | number: '1.2-2'}}</p>
+        <a class="btn btn-success w-100" [routerLink]="['/deposit']">Deposit</a>
+        <hr />
+        <a class="btn btn-danger w-100" [routerLink]="['/withdraw']">Withdraw</a>
+    </div>
+</div>
